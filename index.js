@@ -19,7 +19,7 @@ let getPegaList = async (budget, winrate=0) => {
         }
     }
 
-    console.log(highWrPegas);
+    return highWrPegas;
 }
 
-getPegaList(500);
+module.exports = {getPegaList};

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEGA GRAPE</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 80%;
+            margin: auto;
+        }
+        .pega-list{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="pega-list" id="pega-list">
+
+        </ul>
+    </div>
+
+    <script>
+        const ul = document.getElementById('pega-list');
+        const socket = io();
+        let liStr = '';
+        socket.on("pega", (data) => {
+            console.log("new data received");
+            liStr = '';
+            for(const [k, v] of Object.entries(data)) {
+                liStr += `<li class="li-p">ID: ${k} --- WR: ${v.wr} --- PRICE: ${v.price}</li>`;
+            }
+
+            ul.innerHTML = liStr;
+        })
+    </script>
+</body>
+</html>
